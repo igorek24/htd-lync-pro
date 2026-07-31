@@ -148,18 +148,31 @@ script:
 | `htd_lync_pro.recall_preset` / `save_preset` | Hardware presets 1–4 |
 | `htd_lync_pro.set_zone_name` / `set_source_name` | Rename on the unit itself (max 10 chars) |
 | `htd_lync_pro.refresh` | Manual full poll |
-| `htd_lync_pro.snapshot` / `restore` | Save all zone states / put them back (only changed zones get commands) — bracket movie night, announcements, experiments |
-| `htd_lync_pro.follow_me` | Move the playing music to another zone (`to_zone`, optional `from_zone`, `exclude_zones`, `turn_off_source`, `copy_volume`, `volume_offset`) |
+| `htd_lync_pro.snapshot` / `restore` | Save all zone states / put them back (only changed zones get commands) — bracket movie night, announcements, experiments. The snapshot lives in memory and does not survive a Home Assistant restart. |
+| `htd_lync_pro.follow_me` | Move the playing music to another zone (`to_zone`, optional `from_zone`, `exclude_zones`, `turn_off_source`, `copy_volume`, `volume_offset`). If several zones are playing and no `from_zone` is given, the lowest-numbered one is used and a warning is logged. |
 | `htd_lync_pro.announce` | TTS message or media URL through the announcement player at a set volume, restoring the previous volume afterwards |
+
+### Events
+
+| Event | Data | Fired |
+|---|---|---|
+| `htd_lync_pro_doorbell` | `entry_id`, `doorbell_input` (1/2 bitmask) | Once per doorbell press, at chime start |
 
 ## Follow-me audio
 
 Music follows you around the house using your motion/presence sensors.
-Import `blueprints/follow_me.yaml` (Settings → Automations → Blueprints →
-Import), then create one automation per room: pick the room's motion
+Import the blueprint (Settings → Automations & Scenes → Blueprints →
+Import Blueprint) using the raw URL of
+[`blueprints/follow_me.yaml`](blueprints/follow_me.yaml) from this
+repository, then create one automation per room: pick the room's motion
 sensor and zone number. Fully configurable per room: excluded zones
 (kids' rooms stay quiet), volume copy/offset, whether the room you left
 turns off, and an active time window.
+
+Tuning tips: use generous motion-sensor timeouts and keep
+`turn_off_source` on — short timeouts can strand the music in a hallway
+you only walked through. The service is a no-op when nothing is playing,
+so the automations are safe to leave enabled.
 
 ## Announcements
 
@@ -181,6 +194,32 @@ options; `media_url` plays a file/stream instead of TTS.
 
 A ready-made whole-house view (zone rows + source dropdowns + party
 buttons + doorbell status) is in [docs/dashboard.yaml](docs/dashboard.yaml).
+
+## Troubleshooting
+
+- **Debug logging** (logs every TX/RX byte):
+
+  ```yaml
+  logger:
+    logs:
+      custom_components.htd_lync_pro: debug
+  ```
+
+  Or at runtime without a restart: Developer Tools → Actions →
+  `logger.set_level` with `custom_components.htd_lync_pro: debug`
+  (runtime setting resets on restart).
+- **Diagnostics**: integration entry → ⋮ → **Download diagnostics** —
+  a JSON with model, firmware, options, and every zone's state (host
+  redacted). Attach it to bug reports.
+- **Zone shows "Zone N" instead of its name**: the unit hadn't answered
+  the name query yet; names sync automatically within seconds. Manual
+  device renames in HA always win over unit names.
+- **Selecting a source turned the zone on**: hardware behavior, not a bug —
+  the Lync powers a zone on for any source-select command.
+- **"Lync reported: … range error"** in the log: the unit rejected a
+  bass/treble/balance/volume value — check the tone-encoding option.
+- **Volume moves on its own after the doorbell**: that's the doorbell
+  restore putting zones back; disable it in Options if unwanted.
 
 ## Protocol notes
 
