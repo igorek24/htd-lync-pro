@@ -34,6 +34,24 @@ plus several things it can't.
 - **Local push** — keypad changes appear in HA immediately; optional
   polling and manual refresh available
 
+## Screenshots
+
+Zone device page — every control in one place (media player, tone
+sliders, DND/doorbell switches, inline source dropdown, diagnostics):
+
+<img src="docs/images/zone_device.png" width="700" alt="Zone device page">
+
+The integration with its 12 zone devices, named straight from the unit:
+
+<img src="docs/images/integration.png" width="700" alt="Integration page">
+
+<details>
+<summary>Devices list</summary>
+
+<img src="docs/images/devices.png" width="700" alt="Devices list">
+
+</details>
+
 ## Installation
 
 ### HACS
