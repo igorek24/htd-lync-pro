@@ -1,0 +1,233 @@
+set_zones:
+  name: Set zones (party preset)
+  description: >-
+    Turn on a set of zones, switch them all to one source, and set a base
+    volume with optional per-zone offsets. Example: pool/sunroom/kitchen on
+    source 3 at volume 30, pool +10, bathroom -5.
+  fields:
+    zones:
+      name: Zones
+      description: Zone numbers to turn on.
+      required: true
+      example: "[1, 2, 5, 7]"
+      selector:
+        object:
+    source:
+      name: Source
+      description: Source number (1-18) or source name as shown on keypads.
+      required: false
+      example: "Sonos"
+      selector:
+        text:
+    volume:
+      name: Base volume
+      description: Keypad-scale volume 0-60 applied to every listed zone.
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 60
+    offsets:
+      name: Volume offsets
+      description: Per-zone volume adjustments relative to the base volume.
+      required: false
+      example: '{"1": 10, "4": -5}'
+      selector:
+        object:
+    others_off:
+      name: Turn other zones off
+      description: Power off every zone not in the list.
+      required: false
+      default: false
+      selector:
+        boolean:
+
+party_mode:
+  name: Party mode
+  description: Switch every zone to one source using the hardware party mode.
+  fields:
+    source:
+      name: Source
+      description: Source number (1-18) or source name.
+      required: true
+      example: "3"
+      selector:
+        text:
+
+all_on:
+  name: All zones on
+  description: Turn every zone on.
+
+all_off:
+  name: All zones off
+  description: Turn every zone off.
+
+recall_preset:
+  name: Recall preset
+  description: Recall one of the four presets stored in the Lync unit.
+  fields:
+    preset:
+      name: Preset
+      required: true
+      selector:
+        number:
+          min: 1
+          max: 4
+
+save_preset:
+  name: Save preset
+  description: Save the current whole-house state into a hardware preset slot.
+  fields:
+    preset:
+      name: Preset
+      required: true
+      selector:
+        number:
+          min: 1
+          max: 4
+
+set_zone_name:
+  name: Set zone name
+  description: Rename a zone on the Lync unit itself (max 10 characters).
+  fields:
+    zone:
+      name: Zone
+      required: true
+      selector:
+        number:
+          min: 1
+          max: 12
+    name:
+      name: Name
+      required: true
+      selector:
+        text:
+
+set_source_name:
+  name: Set source name
+  description: Rename a source on the Lync unit itself (max 10 characters).
+  fields:
+    source:
+      name: Source
+      description: Source number (1-18) or current source name.
+      required: true
+      selector:
+        text:
+    name:
+      name: Name
+      required: true
+      selector:
+        text:
+
+refresh:
+  name: Refresh
+  description: Manually poll the Lync unit for a full state refresh (all zone statuses, names, and MP3 state).
+
+snapshot:
+  name: Snapshot
+  description: Save the current power/source/volume of every zone (in memory).
+
+restore:
+  name: Restore
+  description: Put every zone back to the last snapshot. Only zones that changed get commands.
+
+follow_me:
+  name: Follow me
+  description: Move what's playing from one zone to another (for presence-based music).
+  fields:
+    to_zone:
+      name: To zone
+      description: Zone to move the music to.
+      required: true
+      selector:
+        number:
+          min: 1
+          max: 12
+    from_zone:
+      name: From zone
+      description: Zone to take the music from. If omitted, the playing zone is used automatically.
+      required: false
+      selector:
+        number:
+          min: 1
+          max: 12
+    exclude_zones:
+      name: Excluded zones
+      description: Zones never followed from and never targeted (e.g. kids' rooms).
+      required: false
+      example: "[5, 6, 10]"
+      selector:
+        object:
+    turn_off_source:
+      name: Turn off source zone
+      description: Turn the previous zone off after moving.
+      required: false
+      default: true
+      selector:
+        boolean:
+    copy_volume:
+      name: Copy volume
+      description: Match the destination volume to the source zone.
+      required: false
+      default: true
+      selector:
+        boolean:
+    volume_offset:
+      name: Volume offset
+      description: Adjust the destination volume relative to the source (dB).
+      required: false
+      default: 0
+      selector:
+        number:
+          min: -30
+          max: 30
+
+announce:
+  name: Announce
+  description: >-
+    Play a TTS message or media file through the announcement player
+    (e.g. a Raspberry Pi VLC feeding the amps' override RCA input),
+    optionally at a set volume, restoring the previous volume afterwards.
+  fields:
+    message:
+      name: Message
+      description: Text to speak (uses the TTS entity from options unless tts_entity is given).
+      required: false
+      selector:
+        text:
+    media_url:
+      name: Media URL
+      description: Media to play instead of TTS (e.g. a chime mp3).
+      required: false
+      selector:
+        text:
+    media_player:
+      name: Media player
+      description: Override the announcement player from options.
+      required: false
+      selector:
+        entity:
+          domain: media_player
+    tts_entity:
+      name: TTS entity
+      description: Override the TTS engine from options.
+      required: false
+      selector:
+        entity:
+          domain: tts
+    volume_level:
+      name: Volume
+      description: Announcement volume (0-1) on the announcement player.
+      required: false
+      selector:
+        number:
+          min: 0
+          max: 1
+          step: 0.05
+    restore_volume:
+      name: Restore volume
+      description: Put the player volume back after the announcement finishes.
+      required: false
+      default: true
+      selector:
+        boolean:

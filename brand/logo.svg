@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 256">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1b2647"/>
+      <stop offset="1" stop-color="#0d1226"/>
+    </linearGradient>
+    <linearGradient id="bars" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="txt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f172a"/>
+      <stop offset="1" stop-color="#334155"/>
+    </linearGradient>
+  </defs>
+
+  <!-- badge with glyph -->
+  <g transform="translate(4 4) scale(0.484)">
+    <rect x="8" y="8" width="496" height="496" rx="112" fill="url(#bg)"/>
+    <rect x="8" y="8" width="496" height="496" rx="112" fill="none"
+          stroke="#38bdf8" stroke-opacity="0.18" stroke-width="4"/>
+    <rect x="338" y="132" width="42" height="90" rx="14" fill="#f8fafc"/>
+    <path d="M114 254 L256 128 L398 254"
+          fill="none" stroke="#f8fafc" stroke-width="30"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M148 262 L148 396 Q148 412 164 412 L348 412 Q364 412 364 396 L364 262"
+          fill="none" stroke="#f8fafc" stroke-width="30"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="url(#bars)">
+      <rect x="179" y="316" width="34" height="62" rx="17"/>
+      <rect x="239" y="250" width="34" height="128" rx="17"/>
+      <rect x="299" y="290" width="34" height="88" rx="17"/>
+    </g>
+  </g>
+
+  <!-- wordmark -->
+  <text x="292" y="128" font-family="DejaVu Sans" font-weight="bold"
+        font-size="80" fill="url(#txt)" letter-spacing="1">HTD Lync Pro</text>
+  <text x="296" y="188" font-family="DejaVu Sans" font-size="40"
+        fill="#0891b2" letter-spacing="10">WHOLE HOUSE AUDIO</text>
+</svg>

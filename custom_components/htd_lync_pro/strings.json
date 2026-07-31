@@ -1,0 +1,59 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "HTD Lync connection",
+        "menu_options": {
+          "tcp": "Network gateway (GW-SL1 / WGW-SL1)",
+          "serial": "Direct RS-232 serial"
+        }
+      },
+      "tcp": {
+        "title": "Network gateway",
+        "data": {
+          "host": "Gateway IP address",
+          "port": "Gateway port"
+        }
+      },
+      "serial": {
+        "title": "Serial connection",
+        "data": {
+          "serial_path": "Serial device path"
+        }
+      },
+      "reconfigure": {
+        "title": "Change HTD Lync connection",
+        "data": {
+          "host": "Gateway IP address",
+          "port": "Gateway port",
+          "serial_path": "Serial device path"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not connect to the Lync controller"
+    },
+    "abort": {
+      "already_configured": "This controller is already configured",
+      "reconfigure_successful": "Connection settings updated"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "HTD Lync options",
+        "data": {
+          "poll_interval": "Polling interval in seconds (0 = push only, poll manually with the Refresh button/service)",
+          "doorbell_restore": "Restore zone power/source/volume after the doorbell chime ends",
+          "max_power_on_volume": "Max volume when a zone turns on, keypad 0-60 (0 = disabled)",
+          "quiet_hours_volume": "Quiet-hours max power-on volume, keypad 0-60 (0 = disabled)",
+          "quiet_hours_start": "Quiet hours start (HH:MM)",
+          "quiet_hours_end": "Quiet hours end (HH:MM)",
+          "announce_media_player": "Announcement media player entity (e.g. media_player.rpi_vlc)",
+          "announce_tts_entity": "TTS engine entity for announcements (e.g. tts.piper)",
+          "tone_encoding": "Bass/treble/balance byte encoding (signed = firmware v3, offset = older firmware)"
+        }
+      }
+    }
+  }
+}

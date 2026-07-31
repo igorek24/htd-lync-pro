@@ -1,0 +1,75 @@
+blueprint:
+  name: HTD Lync Pro — Follow-me audio
+  description: >-
+    When motion is detected in a room, move the currently playing music to
+    that room's zone. Create one automation per room from this blueprint.
+    Excluded zones are never followed from or targeted.
+  domain: automation
+  input:
+    motion_sensor:
+      name: Motion / presence sensor for this room
+      selector:
+        entity:
+          domain: binary_sensor
+    zone:
+      name: This room's Lync zone number
+      selector:
+        number:
+          min: 1
+          max: 12
+          mode: box
+    exclude_zones:
+      name: Excluded zones
+      description: "Zone numbers to never follow from or into, e.g. [5, 6]"
+      default: []
+      selector:
+        object:
+    turn_off_source:
+      name: Turn off the room you left
+      default: true
+      selector:
+        boolean:
+    copy_volume:
+      name: Copy volume to the new room
+      default: true
+      selector:
+        boolean:
+    volume_offset:
+      name: Volume offset for this room (dB)
+      default: 0
+      selector:
+        number:
+          min: -30
+          max: 30
+    only_after:
+      name: Only active after
+      default: "00:00:00"
+      selector:
+        time:
+    only_before:
+      name: Only active before
+      default: "23:59:59"
+      selector:
+        time:
+
+trigger:
+  - platform: state
+    entity_id: !input motion_sensor
+    to: "on"
+
+condition:
+  - condition: time
+    after: !input only_after
+    before: !input only_before
+
+action:
+  - action: htd_lync_pro.follow_me
+    data:
+      to_zone: !input zone
+      exclude_zones: !input exclude_zones
+      turn_off_source: !input turn_off_source
+      copy_volume: !input copy_volume
+      volume_offset: !input volume_offset
+
+mode: single
+max_exceeded: silent

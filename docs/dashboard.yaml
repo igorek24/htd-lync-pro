@@ -1,0 +1,80 @@
+# Whole-house audio dashboard view for HTD Lync Pro.
+# Settings -> Dashboards -> your dashboard -> ✏ -> ⋮ Raw editor -> add this view.
+# Adjust entity ids to your zone names (these match zones named
+# Kitchen, LivingRoom, Office, MasterBed, ... as stored in the unit).
+
+title: Whole House Audio
+path: audio
+icon: mdi:speaker-multiple
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: button
+        entity: button.htd_lync12_all_zones_on
+        name: All On
+        icon: mdi:power
+      - type: button
+        entity: button.htd_lync12_all_zones_off
+        name: All Off
+        icon: mdi:power-off
+      - type: button
+        entity: button.htd_lync12_recall_preset_1
+        name: Preset 1
+      - type: button
+        entity: button.htd_lync12_recall_preset_2
+        name: Preset 2
+
+  - type: entities
+    title: Status
+    entities:
+      - entity: binary_sensor.htd_lync12_doorbell_ringing
+        name: Doorbell
+      - entity: media_player.htd_lync12_mp3_player
+        name: Built-in MP3 player
+
+  - type: entities
+    title: Zones
+    entities:
+      - entity: media_player.kitchen
+      - entity: select.kitchen_source
+        name: "↳ source"
+      - entity: media_player.livingroom
+      - entity: select.livingroom_source
+        name: "↳ source"
+      - entity: media_player.office
+      - entity: select.office_source
+        name: "↳ source"
+      - entity: media_player.masterbed
+      - entity: select.masterbed_source
+        name: "↳ source"
+      - entity: media_player.evy_s_bed
+      - entity: select.evy_s_bed_source
+        name: "↳ source"
+      - entity: media_player.mia_s_bed
+      - entity: select.mia_s_bed_source
+        name: "↳ source"
+      - entity: media_player.gatage
+      - entity: select.gatage_source
+        name: "↳ source"
+      - entity: media_player.1stflbath
+      - entity: select.1stflbath_source
+        name: "↳ source"
+      - entity: media_player.masterbath
+      - entity: select.masterbath_source
+        name: "↳ source"
+      - entity: media_player.girlsbath
+      - entity: select.girlsbath_source
+        name: "↳ source"
+      - entity: media_player.pool
+      - entity: select.pool_source
+        name: "↳ source"
+      - entity: media_player.sunroom
+      - entity: select.sunroom_source
+        name: "↳ source"
+
+  # Example party button: create script.pool_party from the README recipe first
+  # - type: button
+  #   name: 🎉 Pool Party
+  #   tap_action:
+  #     action: call-service
+  #     service: script.pool_party

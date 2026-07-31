@@ -1,0 +1,14 @@
+{
+  "domain": "htd_lync_pro",
+  "name": "HTD Lync Pro - Lync6/Lync12 Whole House Audio",
+  "codeowners": ["@igorkuz"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://git.syfocloud.com/igorkuz/htd-lync-pro",
+  "integration_type": "hub",
+  "iot_class": "local_push",
+  "issue_tracker": "https://git.syfocloud.com/igorkuz/htd-lync-pro/issues",
+  "loggers": ["custom_components.htd_lync_pro"],
+  "requirements": ["pyserial-asyncio-fast>=0.13"],
+  "version": "0.2.0"
+}
