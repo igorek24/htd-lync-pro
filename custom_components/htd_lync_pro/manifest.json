@@ -1,7 +1,7 @@
 {
   "domain": "htd_lync_pro",
   "name": "HTD Lync Pro - Lync6/Lync12 Whole House Audio",
-  "codeowners": ["@igorkuz"],
+  "codeowners": ["@igorek24"],
   "config_flow": true,
   "dependencies": [],
   "documentation": "https://git.syfocloud.com/home-assistant/htd-lync-pro",
