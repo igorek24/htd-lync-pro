@@ -28,6 +28,10 @@
           "port": "Gateway port",
           "serial_path": "Serial device path"
         }
+      },
+      "discovery_confirm": {
+        "title": "HTD controller discovered",
+        "description": "Found an HTD {model} at {host} (via its GW-SL1 gateway). Add it to Home Assistant?"
       }
     },
     "error": {
@@ -36,7 +40,8 @@
     "abort": {
       "already_configured": "This controller is already configured",
       "reconfigure_successful": "Connection settings updated"
-    }
+    },
+    "flow_title": "HTD {model} ({host})"
   },
   "options": {
     "step": {

@@ -1,14 +1,28 @@
 {
   "domain": "htd_lync_pro",
   "name": "HTD Lync Pro - Lync6/Lync12 Whole House Audio",
-  "codeowners": ["@igorek24"],
+  "codeowners": [
+    "@igorek24"
+  ],
   "config_flow": true,
   "dependencies": [],
+  "dhcp": [
+    {
+      "macaddress": "A44F29*"
+    },
+    {
+      "macaddress": "A64F29*"
+    }
+  ],
   "documentation": "https://git.syfocloud.com/home-assistant/htd-lync-pro",
   "integration_type": "hub",
   "iot_class": "local_push",
   "issue_tracker": "https://git.syfocloud.com/home-assistant/htd-lync-pro/issues",
-  "loggers": ["custom_components.htd_lync_pro"],
-  "requirements": ["pyserial-asyncio-fast>=0.13"],
-  "version": "0.2.1"
+  "loggers": [
+    "custom_components.htd_lync_pro"
+  ],
+  "requirements": [
+    "pyserial-asyncio-fast>=0.13"
+  ],
+  "version": "0.3.0"
 }

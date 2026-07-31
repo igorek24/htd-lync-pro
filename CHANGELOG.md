@@ -44,3 +44,9 @@ GW-SL1 gateway.
   per the new Home Assistant 2026.3+ mechanism — the integration icon now
   displays without a central brands-repo entry
 - Add MIT license, CI validation (HACS + hassfest + protocol tests), wiki
+
+## 0.3.0 — 2026-07-31
+
+- Automatic discovery: HA now detects a GW-SL1 gateway on the network via
+  its DHCP lease (HTD MAC prefixes) and offers the integration with the
+  model and IP pre-verified — one click to add

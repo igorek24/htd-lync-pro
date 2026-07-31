@@ -9,6 +9,7 @@ import voluptuous as vol
 from homeassistant.config_entries import ConfigFlow, ConfigFlowResult, OptionsFlow, ConfigEntry
 from homeassistant.const import CONF_HOST, CONF_PORT
 from homeassistant.core import callback
+from homeassistant.helpers.service_info.dhcp import DhcpServiceInfo
 
 from .client import HtdLyncClient
 from .const import (
@@ -56,8 +57,48 @@ async def _validate(client: HtdLyncClient) -> str:
 class HtdLyncConfigFlow(ConfigFlow, domain=DOMAIN):
     VERSION = 1
 
+    def __init__(self) -> None:
+        self._discovered: dict[str, Any] = {}
+        self._discovered_model: str | None = None
+
     async def async_step_user(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
         return self.async_show_menu(step_id="user", menu_options=["tcp", "serial"])
+
+    async def async_step_dhcp(self, discovery_info: DhcpServiceInfo) -> ConfigFlowResult:
+        """A GW-SL1 gateway appeared on the network (HTD MAC prefix)."""
+        host = discovery_info.ip
+        await self.async_set_unique_id(f"{host}:{DEFAULT_PORT}")
+        self._abort_if_unique_id_configured()
+        for entry in self._async_current_entries(include_ignore=False):
+            if entry.data.get(CONF_HOST) == host:
+                return self.async_abort(reason="already_configured")
+
+        client = HtdLyncClient(host=host, port=DEFAULT_PORT)
+        try:
+            model = await _validate(client)
+        except (asyncio.TimeoutError, OSError):
+            return self.async_abort(reason="cannot_connect")
+
+        self._discovered = {CONF_HOST: host, CONF_PORT: DEFAULT_PORT}
+        self._discovered_model = model
+        self.context["title_placeholders"] = {"model": model, "host": host}
+        return await self.async_step_discovery_confirm()
+
+    async def async_step_discovery_confirm(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        if user_input is not None:
+            return self.async_create_entry(
+                title=f"HTD {self._discovered_model}", data=self._discovered
+            )
+        self._set_confirm_only()
+        return self.async_show_form(
+            step_id="discovery_confirm",
+            description_placeholders={
+                "model": self._discovered_model or "Lync",
+                "host": self._discovered[CONF_HOST],
+            },
+        )
 
     async def async_step_tcp(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
         errors: dict[str, str] = {}
