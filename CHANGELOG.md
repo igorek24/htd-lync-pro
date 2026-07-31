@@ -37,3 +37,10 @@ GW-SL1 gateway.
 - Power-on volume cap and quiet-hours cap options
 - Diagnostics support (Download Diagnostics on the integration entry)
 - Ready-made dashboard view in `docs/dashboard.yaml`
+
+## 0.2.1 — 2026-07-31
+
+- Ship brand icons inside the integration (`custom_components/htd_lync_pro/brand/`)
+  per the new Home Assistant 2026.3+ mechanism — the integration icon now
+  displays without a central brands-repo entry
+- Add MIT license, CI validation (HACS + hassfest + protocol tests), wiki
