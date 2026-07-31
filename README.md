@@ -259,6 +259,10 @@ decompiled official Android app.
   [home-assistant/brands](https://github.com/home-assistant/brands)
   (required for the integration icon to appear in the HA UI)
 
+## License
+
+[MIT](LICENSE)
+
 ## Credits
 
 Built from the author's own
