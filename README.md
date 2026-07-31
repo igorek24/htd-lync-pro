@@ -270,3 +270,15 @@ Built from the author's own
 HTD's *Lync Serial Commands v1.1* and *Lync Hex Codes* documents, analysis
 of the official HTD Lync Android app, and live captures from a Lync 12
 (firmware v3).
+
+## Trademarks and disclaimer
+
+This is an **unofficial, independent** project, not affiliated with,
+endorsed by, or supported by Home Theater Direct, Inc.
+
+"HTD", "Home Theater Direct" and "Lync" are trademarks of their respective
+owner and are used here only to identify the hardware this integration
+works with (nominative use). No HTD logo or brand artwork is included in
+this repository — the integration's icon is original artwork created for
+this project. Protocol details were derived from HTD's publicly published
+documentation and from observing traffic to hardware owned by the author.
