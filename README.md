@@ -5,6 +5,13 @@
 
 # HTD Lync Pro — Lync6/Lync12 Whole House Audio for Home Assistant
 
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=igorek24&repository=htd-lync-pro&category=integration)
+[![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=htd_lync_pro)
+
+[![GitHub release](https://img.shields.io/github/v/release/igorek24/htd-lync-pro?style=flat-square)](https://github.com/igorek24/htd-lync-pro/releases)
+[![License](https://img.shields.io/github/license/igorek24/htd-lync-pro?style=flat-square)](LICENSE)
+[![hacs](https://img.shields.io/badge/HACS-custom-41BDF5.svg?style=flat-square)](https://hacs.xyz)
+
 Full-control Home Assistant integration for the **HTD Lync 6 / Lync 12**
 whole-house audio controllers. Everything the official HTD app can do —
 plus several things it can't.
@@ -55,6 +62,9 @@ The integration with its 12 zone devices, named straight from the unit:
 ## Installation
 
 ### HACS
+
+**Easiest:** click the blue *My Home Assistant* badge at the top of this page — it opens your own Home Assistant and pre-fills this repository as a HACS custom repository. Then Download and restart.
+
 
 HACS requires the repository to be hosted on GitHub — add the GitHub mirror
 as a custom repository (type: Integration), install **HTD Lync Pro**, and
